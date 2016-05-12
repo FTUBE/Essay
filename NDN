@@ -15,6 +15,7 @@ NDN的挑战：1.路由扩展。2.模型上，NDN和现在的IP，通信参数�
 
 解决方法概述（贡献）：nDNS解决网络运行，ACM解决模型（开销过大），nCDN渐进部署（NDN与CDN结合，nCDN作为一个IP-冗余数据间的薄层）
 
+=====ICN=====
 ICN的基础设施：Producer带着NDO,中间有很多内容路由器(Content Router),这些路由器能够转发Request、NDO,末端是Consumer, Consumer发出Request请求NDO。
 
 ICN的原语primitives：数据命名，数据获取，缓存，数据安全
@@ -29,5 +30,37 @@ ICN的原语primitives：数据命名，数据获取，缓存，数据安全
 	      2. 聚合了一个请求与回复
 
 	［注意］当然这是对于没有引用新的路由标识符的NDN才这样的，其他的比如SAIL,用的是HTTP over IP。
+	［注意］这个称为软状态（Soft State）
 	
 -----缓存
+	替换：LRU即可达到很好的缓存效果
+	缓存部署：请求的分布决定缓存部署
+	缓存决策：是否缓存NDO,
+			分为，显式（全局协同，路径，临域），隐式（按照概率之类的决定是否缓存，节点之间几乎不协同）HINT_1 : 这里的ProbCache和之前的非常像，就是距离命中点越远的越不可能缓存。之前说的是距离命中点越远的“缓存的越少”
+
+-----数据验证
+	ICN里的验证也需要突破数据存储和会话的限制
+	1. Integrity,Authenticity,Validity
+	2. 溯源合法（生产者是对的）
+	3. 相关性，是Consumer想要的
+
+=====NDN=====
+
+	窄腰：NDN和传统IP都有窄腰，IP是地址，NDN是named data（以接入点命名的数据包）
+	报文格式：请求，对应Interest
+		  NDO，对应Data
+		  以上两种都是TLV型的，名字，类型，多长，值
+-----NDN路由
+	包含，
+		CS,缓存
+		PIT,转发过的纪录 HINT_2
+		FIB,转发表
+-----数据获取过程
+	Consumer发一个Interest，NDN路由器收到之后进行查CS.
+		没有再查PIT,有的话按照OUT转发，并且加入IN
+		没有再FIB
+-----NDN采用层次化命名
+-----NDN采用基于名字的路由聚合与最长前缀匹配
+	在此之上，NDN还有路由anchor，就是用LINK信息（附在Interest里面）指示内容路由器如果
+	根据Interest的名字找不到路由的话，就用LINK指示的anchor链接到安全路由
+	但是缓存还是基于名字
