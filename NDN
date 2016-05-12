@@ -2,9 +2,16 @@ Research on the Key Issues of Usability of Named Data Networking
 命名数据网 (NDN) 可用性关键问题研究
 Author: XiaoKe Jiang (Prof. Bi Jun PhD student)
 
-NDN：以信息为中心的，将转发等机制与对命名数据的操作创造性地结合。如此，NDN可利用冗余联路，多路径，高分发效率。且数据有效性独立于存储和通信。
+NDN：以信息为中心的，将转发等机制与对命名数据的操作创造性地结合。如此，NDN可利用冗余联路，多路径，高分发效率。且数据有效性独立于存储和通信。［从属于ICN，信息中心网络］
+Motivation：是由于分发数据的负担需求增大。分发数据与END-TO-END不匹配。大家一般用IP-patch(组播etc)、以及overlay解决，overlay没有解决不匹配这个。
+而且overlay（应用层）独立于网络层路由，带来冗余流量。
+
 
 NDN的挑战：1.路由扩展。2.模型上，NDN和现在的IP，通信参数等。3.缺少应用
 具体来说，
 路由扩展：FIB中不够（LINK数据结构解决）、MAN-IN-THE-MIDDLE验证、consumer验证时producer已下线、producer移动需要名字解析系统。
-模型优化：
+模型优化：因为非end-to-end。consumer 不能确定它发出的请求从哪里取得对应的数据、包尺寸（几百个字节的开销）、幂等性（名字独立，数据包包含NetworkLayer所需信息）
+兼容性：没应用，TCP/IP不兼容
+
+解决方法概述（贡献）：nDNS解决网络运行，ACM解决模型（开销过大），nCDN渐进部署（NDN与CDN结合，nCDN作为一个IP-冗余数据间的薄层）
+
