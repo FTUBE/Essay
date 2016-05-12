@@ -1,4 +1,4 @@
-Research on the Key Issues of Usability of Named Data Networking
+ResearchA on the Key Issues of Usability of Named Data Networking
 命名数据网 (NDN) 可用性关键问题研究
 Author: XiaoKe Jiang (Prof. Bi Jun PhD student)
 
@@ -15,3 +15,19 @@ NDN的挑战：1.路由扩展。2.模型上，NDN和现在的IP，通信参数�
 
 解决方法概述（贡献）：nDNS解决网络运行，ACM解决模型（开销过大），nCDN渐进部署（NDN与CDN结合，nCDN作为一个IP-冗余数据间的薄层）
 
+ICN的基础设施：Producer带着NDO,中间有很多内容路由器(Content Router),这些路由器能够转发Request、NDO,末端是Consumer, Consumer发出Request请求NDO。
+
+ICN的原语primitives：数据命名，数据获取，缓存，数据安全
+
+-----命名（NDO的命名）与获取
+	要求：唯一，持续
+	两种方式：层次化（e.g. URL），自验证(non-structured)(Hashing Digest,L是签名的话，L可以验证公钥)
+	方式：有一个NDO，他宣告自己的名字，到路由系统上。路由系统建立［基于名字的转发表］
+	      之后每来一个请求，他就把这个请求的名字记下，转发记下，收到的端口记下。
+	      当这个请求碰到NDO时，内容路由器将找到上述说的那条记录（对应于名字的），回传到“收到的端口”，这样有两点好处：
+	      1. 避免回路
+	      2. 聚合了一个请求与回复
+
+	［注意］当然这是对于没有引用新的路由标识符的NDN才这样的，其他的比如SAIL,用的是HTTP over IP。
+	
+-----缓存
