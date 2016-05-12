@@ -1,1 +1,10 @@
-NDN
+Research on the Key Issues of Usability of Named Data Networking
+命名数据网 (NDN) 可用性关键问题研究
+Author: XiaoKe Jiang (Prof. Bi Jun PhD student)
+
+NDN：以信息为中心的，将转发等机制与对命名数据的操作创造性地结合。如此，NDN可利用冗余联路，多路径，高分发效率。且数据有效性独立于存储和通信。
+
+NDN的挑战：1.路由扩展。2.模型上，NDN和现在的IP，通信参数等。3.缺少应用
+具体来说，
+路由扩展：FIB中不够（LINK数据结构解决）、MAN-IN-THE-MIDDLE验证、consumer验证时producer已下线、producer移动需要名字解析系统。
+模型优化：
