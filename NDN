@@ -77,6 +77,36 @@ ICN的原语primitives：数据命名，数据获取，缓存，数据安全
 	需要一个稳定的证书仓库”。
 
 	需要验证三方面，有效（是真的）、溯源合法（是你产生的，且你应该产生），相关性
+=====nDNS=====
 
+nDNS是作者设计的，之前的工作有，比如NDNS(Afanasyev),作者是在DNS+DNSSEC的基础之山添加了一些新的功能。
 
+-----nDNS的挑战
+	签名任务是资源的Producer而不是name server
+	没有服务器选择逻辑（就是DNS request发给谁是由名字来路由的）
+	答案必须对应于请求而不能是其他
+-----nDNS的设计
+	特点：
+	所有路由器都能到Root Server
+	层次化
+	Interest请求只能包含一个请求，故是一个显式请求
 
+	命名空间：
+	层次化
+	名字域是域名后面添加一个NDNS，例如:/msra/NDNS
+	有个label,HINT3:实际是一个压缩方法
+
+	格式：
+	保留了DNS，格式完全由应用决定
+
+	迭代解析：
+	如果查/net/ndsim/www的TXT RR
+	则先查/net/NDNS,发包"/NDNS/net/NS"
+	回来一个内容告诉接下来的，或者无内容。
+	再查/net/ndsim/NDNS,发包"/net/NDNS/ndsim/NS"（原因：此时，查的是/net下的name server）
+	再查/net/ndsim/www/NDNS,发包"/net/ndsim/NDNS/www/NS"，这个时候得到一个NACK，表示无人托管下一级
+	则此时发包/net/ndsim/NDNS/www/TXT获取数据
+
+	另外，如果要是这里面/net/ndsim/没有server，但是/net/ndsim/www有的话
+	则你发一个/net/NDNS/ndsim/NS就会有特殊NACK
+	这个特殊体现在Resolver会自动补全一个www，变成/net/NDNS/ndsim/www/NS
