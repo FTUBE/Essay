@@ -110,3 +110,18 @@ nDNS是作者设计的，之前的工作有，比如NDNS(Afanasyev),作者是在
 	另外，如果要是这里面/net/ndsim/没有server，但是/net/ndsim/www有的话
 	则你发一个/net/NDNS/ndsim/NS就会有特殊NACK
 	这个特殊体现在Resolver会自动补全一个www，变成/net/NDNS/ndsim/www/NS
+
+	验证：
+	
+	证书作为一条资源记录也被认证
+	证书的验证链为HINT:4
+	（在这个验证链之中，Name为证书的名字，箭头由，
+				验证证书
+				指向
+				被验证证书。
+	其中，KeyLocator表明了验证这个证书的证书在哪个位置
+	举个例子，看/net zone的第一个。该证书的KeyLocator在"/KEY/net/ksk-Y/ID-CERT"上，也就是,"/"zone的第二个的Name域）
+
+	＊名字也可以通过设定信任锚点来缩短信任链长度
+
+-----数据管理
