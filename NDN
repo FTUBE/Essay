@@ -1,4 +1,4 @@
-ResearchA on the Key Issues of Usability of Named Data Networking
+Research on the Key Issues of Usability of Named Data Networking
 命名数据网 (NDN) 可用性关键问题研究
 Author: XiaoKe Jiang (Prof. Bi Jun PhD student)
 
@@ -167,3 +167,31 @@ nDNS是作者设计的，之前的工作有，比如NDNS(Afanasyev),作者是在
 
 	并且带来的G2T变化十分迅速（0-5000B）
 	另外，当丢帧率从0-2%变化的时候，最优payload size下降幅度较大（调整必要性,20000-25000B的幅度）
+
+	多跳情况下的结论：
+	多跳链路中只要有一跳丢帧，则丢包重传，因此表达式为连乘积形式。
+
+	多跳多路径下的结论：
+	对于每一条路径，多了一个权重Wi，最后求和
+	表达式是以上两种的范型。
+
+	异构链路下的结论：
+	异构链路指的是既有可靠TCP（可以自己修正丢帧），又有不可靠。
+	则可靠下的丢帧由链路修正（导致总体丢包率，等于，OMEGA，即，对于确定的一帧，丢了的概率。）
+
+	丢帧率非独立下的结论：
+	作者使用Two-State Continuous Time Markov Chain来建模。
+	估计准确丢包率
+
+------ACM机制
+
+	Consumer，通过被动测丢帧率，或者主动发离散Size的包来测合适Payload。来
+	估计ChunkSize。
+
+	这个ChunkSize会被加在地址中，形成如下形式：
+
+	"/com/youtube/avatar.flv/0xAC8832（表示8832Byte位尺寸）/0X0010（SeqNo，也可以加上FB表示Explicitly说明偏移量。）"
+
+	丢帧率Omega会被Upper/Lower Bound修正。（1/8，7/8线性修正）
+	
+	
