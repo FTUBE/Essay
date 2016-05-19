@@ -32,3 +32,44 @@ Use Case 4 - Park Model
     
 1. One at edge shall switch to the other AP in order to provide better connectivity.
 2. Private SSID, instead of Public SSID is chosen, when radio conditions are similiar.
+
+Exisiting Alternatives:
+
+-Multibands Operations(MBO)
+
+For AP and devices to exchange information such as preferred channels, AP's capabilities to accept new stations' requests, etc. Information are used for the device to make intelligent decisions on choosing APs.
+
+Also, MBO can mandate to change the BSS of stations.
+
+Disadvantages : No test or estimatation to say which connections can provide best QoE.
+
+-HotSpot 2.0(HS2.0)
+
+Seamless connection, and find available services.
+
+Disadvantages : No gurrantee to provide best QoE.
+
+Required Capabilities:
+
+1.Reduced airtime overhead for transmitting Probe Request frame
+	  -OCE-STA has 20ms deferral to send any Probe Request frame.
+	  -Neighboring Reduced. An AP, provided that having neighbor information, shall be capable of embedding Neighbor Reduced information into Probe Discovery/Response frame, and send it. Also, STA is capable of receiving it, and making decision based on which.
+	  -FILS Discovery frame and Beacon frame has a minimum sending interval.
+	  Also, If neighbor embedded information in what described above, then no FILS is sent.
+
+2. ...........for transimitting Probe Response
+   	  -OCE-APs are required being capable of boardcasting Response. This is to avoid replication.
+
+3. Short Setup
+	  -OCE-APs & STAs are required to support FILS shared key auth.
+
+4. AP alloc.
+	  -Reject based on insufficient RSSI status.
+	  	  Reject a request. Reply it with:
+		  	 1. Status code.
+			 2. Amount of difference between 'can be associated'
+			 3. Minimum time before next request sent to the same AP.
+	  -Hashed domains, within which, fast FILS reauth. is possible,
+	  	  should be embedded in FILS.
+	  -AP shall transmit KPI information, which the STA could obtain when associated with APs.
+	  
