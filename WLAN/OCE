@@ -1,0 +1,20 @@
+OCE stands for Optimum Connection Experience, which targets on providing users
+with best connectivity experience while using OCE certified AP and devices.
+
+Motivations:
+LAA-LTE as a competitor.
+The development of proprietary solutions by Operators.
+
+Use Case Definitions:
+Use Case 1 - Airport Model
+    When a flight is arrived, and large group of passengers are taking off, their devices keep searching for available APs.
+
+1. This kind of scenario gurrantees that no interruption to existing connectivity is caused by the searching process.
+2. And, more importantly, as each user is using OCE-certified devices(also, with OCE-certified AP deployed among the airport.), devices shall find the best AP that gives best experience. The choosing is based on exchanging information between APs and STAs.
+3. The load is balanced among APs without overloading the current usages.
+
+Use Case 2 - Stadium Model
+    During the break of a match, large group of clients start searching available APs in a simutaneous fashion. This use case should require:
+
+1. Clients connectivity shall not be impacted by the excessive probing frames, and the like(Management frames)
+2. Sticky Clients problem should be resolved, as one may transposition from one place to the other.
