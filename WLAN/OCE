@@ -10,7 +10,8 @@ Use Case 1 - Airport Model
     When a flight is arrived, and large group of passengers are taking off, their devices keep searching for available APs.
 
 1. This kind of scenario gurrantees that no interruption to existing connectivity is caused by the searching process.
-2. And, more importantly, as each user is using OCE-certified devices(also, with OCE-certified AP deployed among the airport.), devices shall find the best AP that gives best experience. The choosing is based on exchanging information between APs and STAs.
+2. And, more importantly, as each user is using OCE-certified devices(also, with OCE-certified AP deployed among the airport.), devices shall find the best AP that gives best experience.
+The choosing is based on exchanging information between APs and STAs.
 3. The load is balanced among APs without overloading the current usages.
 
 Use Case 2 - Stadium Model
@@ -18,3 +19,16 @@ Use Case 2 - Stadium Model
 
 1. Clients connectivity shall not be impacted by the excessive probing frames, and the like(Management frames)
 2. Sticky Clients problem should be resolved, as one may transposition from one place to the other.
+
+Use Case 3 - Shopping Mall Model
+    As one walks through a shopping area where OCE-certified devices are deployed. This model requires:
+
+1. No overloaded AP choosing.
+2. No far away AP choosing.
+3. Choice balancing between using Wifi Connection or Cellular networks.
+
+Use Case 4 - Park Model
+    Three people are accessing an AP. One is at the edge of that AP, potentially experiencing low rate transimission. There is another AP in the near, which, the device at the edge can connect.
+    
+1. One at edge shall switch to the other AP in order to provide better connectivity.
+2. Private SSID, instead of Public SSID is chosen, when radio conditions are similiar.
