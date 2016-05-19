@@ -32,3 +32,23 @@ Use Case 4 - Park Model
     
 1. One at edge shall switch to the other AP in order to provide better connectivity.
 2. Private SSID, instead of Public SSID is chosen, when radio conditions are similiar.
+
+Exisiting Alternatives:
+
+-Multibands Operations(MBO)
+
+For AP and devices to exchange information such as preferred channels, AP's capabilities to accept new stations' requests, etc. Information are used for the device to make intelligent decisions on choosing APs.
+
+Also, MBO can mandate to change the BSS of stations.
+
+Disadvantages : No test or estimatation to say which connections can provide best QoE.
+
+-HotSpot 2.0(HS2.0)
+
+Seamless connection, and find available services.
+
+Disadvantages : No gurrantee to provide best QoE.
+
+Required Capabilities:
+
+Reduced airtime overhead for transmitting Probe Request frame
